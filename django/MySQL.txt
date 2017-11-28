@@ -1,0 +1,16 @@
+CREATE DATABASE pubmed_alerts;
+USE pubmed_alerts;
+CREATE TABLE task_table(
+id int,
+task_id varchar(10),
+keyword varchar(200),
+email varchar(50)
+);
+INSERT INTO page_task_table values(1, 'task001', 'lncRNA', '676743449@qq.com');
+INSERT INTO page_task_table values(2, 'task002', 'lncRNA Zebrafish', 'chenwen@188.com');
+
+CREATE TABLE pmid_table(
+id int,
+task_id varchar(10),
+pmid varchar(50)
+);
