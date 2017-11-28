@@ -35,7 +35,14 @@ def get_papers_list(keyword, retmax = "20"):
     for i, paper in enumerate(papers['PubmedArticle']):        
         Title = paper['MedlineCitation']['Article']['ArticleTitle']
         try:
-            Abstract = paper['MedlineCitation']['Article']['Abstract']["AbstractText"]
+            Abstract = ''
+            for Text in paper['MedlineCitation']['Article']['Abstract']["AbstractText"]:
+                try:
+                    Label = Text.attributes['Label']
+                    Abstract += Label + ': ' 
+                except:
+                    pass
+                Abstract += Text.title() + '\n'
         except:
             Abstract = "NA"
         PMID = paper['MedlineCitation']["PMID"].split(',')[0]
@@ -66,6 +73,5 @@ if __name__ == '__main__':
     results = search('lncRNA')
     id_list = results['IdList']
     papers = fetch_details(id_list)
-    for i, paper in enumerate(papers['PubmedArticle']):        
+    for i, paper in enumerate(papers['PubmedArticle']): 
         Title = paper['MedlineCitation']['Article']['ArticleTitle']
-        print("{}. {}".format(i+1, Title))        
